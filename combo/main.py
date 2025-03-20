@@ -1,27 +1,17 @@
-
-# Imports
-import random as ran
-import math as mt
-
-# Establish Variables
-length = 4; min = 0; max = 4; arr = [0]; iter = 0; dist = int(mt.dist(int(max), int(min)))
-print(dist)
-total_combos = length ** dist; digits = list(range(min, max + 1))
-
-# Run loop
-def getCombo():
-    combo = ''
-    iter = 0
-    while iter != length:
-        combo_digit = ran.choice(digits)
-        combo = int(str(combo) + '' + str(combo_digit))
-        iter = iter + 1
-    return combo
-
-while iter != total_combos:
-    combo = getCombo()
-    if combo not in arr:
-        arr.append(combo)
-        iter = iter + 1
-arr.sort()
-print(arr)
+# Made by Skj0nes-2
+import itertools as it; import re; import os
+char = input("Characters: "); digits = int(input("Digit Count: "))
+l = [list(char)]; l = [element for element in l for _ in range(int(digits))]; c = list(it.product(*l)); iter = 1
+with open('combo.txt', 'w') as file:
+    file.write('combinations'.upper())
+for item in c:
+    combo = re.sub('[' + re.escape("'(), ") + ']', '', str(item))
+    combo = f"\n{iter}: {combo}"
+    with open('combo.txt', 'a') as file:
+        file.write(combo)
+    try:
+        os.system('cls' if os.name == 'nt' else 'clear')
+    except:
+        pass
+    print(f"Generated Combo {iter}")
+    iter = iter + 1
