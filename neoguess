@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+# Made by Skj0nes-2
+from itertools import product; from re import sub; from os import getcwd;
+seen = set(); digit_list = []; combos = '' # Set Default Variables
+digits = list(input('Combo Characters: ')); combo_len = int(input("Combo Length: ")) # Input
+# Remove Duplicates
+for item in digits:
+  if item not in seen:
+      digit_list.append(item) # Add to final list
+      seen.add(item) # Add to used
+print(f'Total Combos: {len(digit_list)**combo_len}'); # Print total combinations
+combo_list = list(product(digit_list, repeat=combo_len)) # Find combinations
+for item in combo_list:
+  item = sub(r"[(),' ]", '', str(item)); # Remove list characters
+  combos = combos + ' ' + item + '\n' # Add item to string
+# Write combinations
+with open('combos.txt', 'w') as file:
+  file.write(combos) # Write
+  print(f"Combos wrote to ' {getcwd()}/combos.txt '") # Report
